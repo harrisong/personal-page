@@ -6,7 +6,7 @@ let wordClock = {
     digitalTimeElement: null,
     updateInterval: null,
     gridWidth: 12,
-    gridHeight: 4,
+    gridHeight: 5,
 
     // Available characters for random padding
     randomChars: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}|;:,.<>?',
@@ -46,6 +46,7 @@ let wordClock = {
         const now = new Date();
         const hours = now.getHours() % 12 || 12; // Convert to 12-hour format
         const minutes = now.getMinutes();
+        const seconds = now.getSeconds();
 
         // Reset all cells to random grey characters
         const cells = this.container.querySelectorAll('.clock-cell');
@@ -55,7 +56,7 @@ let wordClock = {
         });
 
         // Get the words to display
-        const timeWords = this.getTimeWords(hours, minutes);
+        const timeWords = this.getTimeWords(hours, minutes, seconds);
 
         // Position the words in the grid
         this.placeWordsInGrid(timeWords);
@@ -64,7 +65,8 @@ let wordClock = {
         const timeString = now.toLocaleTimeString('en-US', {
             hour12: true,
             hour: 'numeric',
-            minute: '2-digit'
+            minute: '2-digit',
+            second: '2-digit'
         });
         this.digitalTimeElement.textContent = `Digital: ${timeString}`;
     },
@@ -74,7 +76,8 @@ let wordClock = {
         const positions = [
             { row: 0, col: 0 }, // IT'S
             { row: 1, col: 0 }, // HOUR
-            { row: 2, col: 0 }  // MINUTES
+            { row: 2, col: 0 }, // MINUTES
+            { row: 3, col: 0 }  // SECONDS
         ];
 
         words.forEach((word, index) => {
@@ -100,7 +103,7 @@ let wordClock = {
         }
     },
 
-    getTimeWords(hours, minutes) {
+    getTimeWords(hours, minutes, seconds) {
         const words = [];
 
         // Always start with "IT'S" or "IT IS"
@@ -123,6 +126,10 @@ let wordClock = {
             words.push(minuteWords);
         }
 
+        // Add seconds
+        const secondWords = this.secondsToWords(seconds);
+        words.push(secondWords);
+
         return words;
     },
 
@@ -142,6 +149,33 @@ let wordClock = {
             };
             const ten = Math.floor(minutes / 10) * 10;
             const one = minutes % 10;
+
+            let result = tens[ten];
+            if (one > 0) {
+                result += ' ' + this.numberToWord(one);
+            }
+            return result;
+        }
+    },
+
+    secondsToWords(seconds) {
+        if (seconds === 0) {
+            return 'ZERO';
+        } else if (seconds < 10) {
+            return 'ZERO ' + this.numberToWord(seconds);
+        } else if (seconds < 20) {
+            const teens = {
+                10: 'TEN', 11: 'ELEVEN', 12: 'TWELVE', 13: 'THIRTEEN',
+                14: 'FOURTEEN', 15: 'FIFTEEN', 16: 'SIXTEEN', 17: 'SEVENTEEN',
+                18: 'EIGHTEEN', 19: 'NINETEEN'
+            };
+            return teens[seconds];
+        } else {
+            const tens = {
+                20: 'TWENTY', 30: 'THIRTY', 40: 'FORTY', 50: 'FIFTY'
+            };
+            const ten = Math.floor(seconds / 10) * 10;
+            const one = seconds % 10;
 
             let result = tens[ten];
             if (one > 0) {
