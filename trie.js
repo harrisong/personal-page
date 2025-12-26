@@ -95,10 +95,10 @@ let trieGame = {
     drawTrie(highlightPrefix = '') {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-        const startX = 400;
+        const startX = this.canvas.width / 2; // Center horizontally
         const startY = 50;
-        const levelHeight = 80;
-        const nodeRadius = 20;
+        const levelHeight = 60; // Reduced height for more levels
+        const nodeRadius = 18; // Slightly smaller nodes
 
         this.drawNode(this.trie, startX, startY, levelHeight, nodeRadius, '', highlightPrefix, 0);
     },
@@ -132,7 +132,9 @@ let trieGame = {
 
         // Draw children
         const children = Object.keys(node.children);
-        const childSpacing = 150 / Math.max(1, children.length - 1) || 150;
+        const minSpacing = 80; // Minimum space between nodes
+        const totalWidth = Math.max(minSpacing * children.length, 200);
+        const childSpacing = totalWidth / Math.max(1, children.length);
 
         children.forEach((char, index) => {
             const childX = x - (children.length - 1) * childSpacing / 2 + index * childSpacing;

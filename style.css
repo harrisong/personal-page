@@ -53,25 +53,22 @@ body {
     box-sizing: border-box;
 }
 
-.sidebar h1 {
-    font-family: 'Manrope', sans-serif;
-    font-size: 1.4rem;
-    font-weight: 500;
-    color: #A0522D;
+.sidebar .avatar {
+    width: 120px;
+    height: 120px;
     margin: 0 auto;
     padding: 0.5rem;
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 10px;
-    text-align: center;
-    width: 60px;
-    height: 60px;
+    border-radius: 15px;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
+    object-fit: cover;
+    border-radius: 12px;
 }
 
 .sidebar p {
@@ -92,7 +89,7 @@ body {
     z-index: 15;
 }
 
-.sidebar h1:hover + p {
+.sidebar .avatar:hover + p {
     opacity: 1;
 }
 
@@ -530,6 +527,62 @@ canvas {
     color: #333;
 }
 
+/* Word Clock */
+.word-clock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px auto;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    padding: 30px;
+    font-family: 'Bogle', sans-serif;
+}
+
+.clock-row {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+.clock-row:last-child {
+    margin-bottom: 0;
+}
+
+.clock-cell {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: normal;
+    color: #888;
+    margin: 2px;
+    transition: all 0.3s ease;
+}
+
+.clock-cell.active {
+    color: #A0522D;
+    font-weight: bold;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+.clock-info {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.clock-info p {
+    font-size: 1.1rem;
+    color: #A0522D;
+    font-weight: 500;
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
     .container {
@@ -577,6 +630,12 @@ canvas {
         width: 100%;
         max-width: 300px;
     }
+
+    .clock-letter {
+        width: 35px;
+        height: 35px;
+        font-size: 20px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -591,5 +650,11 @@ canvas {
     .game-controls button {
         padding: 10px 20px;
         font-size: 0.9rem;
+    }
+
+    .clock-letter {
+        width: 30px;
+        height: 30px;
+        font-size: 18px;
     }
 }
