@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harrison Ng - Software Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Abstract Art Background -->
+    <canvas id="abstract-bg"></canvas>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h1>HN</h1>
+        <p>Software Engineer specializing in distributed computing and backend development</p>
+        <button class="nav-btn active" onclick="showSection('about', this)" title="About">
+            👤
+        </button>
+        <div class="dropdown">
+            <button class="nav-btn dropdown-btn" onclick="document.querySelector('.dropdown').classList.toggle('show')" title="Games">
+                🎮
+            </button>
+            <div class="dropdown-content">
+                <button class="nav-btn" onclick="showSection('pong', this)">Pong Game</button>
+                <button class="nav-btn" onclick="showSection('maze', this)">Maze Solver</button>
+                <button class="nav-btn" onclick="showSection('sudoku', this)">Sudoku Solver</button>
+                <button class="nav-btn" onclick="showSection('trie', this)">Trie Search</button>
+                <button class="nav-btn" onclick="showSection('binary', this)">Binary Search</button>
+                <button class="nav-btn" onclick="showSection('connect4', this)">Connect 4</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+
+        <!-- Content Sections -->
+        <div id="about" class="section active">
+            <div class="about-content">
+                <p>I specialize in distributed systems and backend architecture, building scalable and resilient applications. My expertise includes:</p>
+                <ul>
+                    <li>Distributed Computing</li>
+                    <li>Backend Development</li>
+                    <li>Database Design</li>
+                    <li>System Architecture & Scalability</li>
+                    <li>Cloud Platforms</li>
+                </ul>
+                <div class="contact">
+                    <p><strong>GitHub:</strong> <a href="https://github.com/harrisong" target="_blank">github.com/harrisong</a></p>
+                </div>
+            </div>
+        </div>
+
+        <div id="pong" class="section">
+            <div class="game-container">
+                <h2>Pong Game</h2>
+                <canvas id="pongCanvas" width="800" height="400"></canvas>
+                <div class="game-controls">
+                    <button onclick="startPong()">Start Game</button>
+                    <button onclick="resetPong()">Reset</button>
+                    <p id="pongScore">Score: Player 1: 0 - Player 2: 0</p>
+                    <p>Player 1: W/S keys | Player 2: Arrow Up/Down</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="maze" class="section">
+            <div class="game-container">
+                <h2>Maze Solver</h2>
+                <div class="algorithm-selector">
+                    <label for="algorithmSelect">Algorithm:</label>
+                    <select id="algorithmSelect">
+                        <option value="bfs">BFS (Breadth-First Search)</option>
+                        <option value="bfs-parallel">BFS Parallelized</option>
+                        <option value="dfs">DFS (Depth-First Search)</option>
+                        <option value="dfs-parallel">DFS Parallelized</option>
+                        <option value="dijkstra">Dijkstra</option>
+                        <option value="astar">A* (A-Star)</option>
+                    </select>
+                </div>
+                <canvas id="mazeCanvas" width="400" height="400"></canvas>
+                <div class="game-controls">
+                    <button onclick="generateMaze()">Generate Maze</button>
+                    <button onclick="solveMaze()" id="solveBtn" disabled>Solve Maze</button>
+                    <button onclick="resetMaze()">Reset</button>
+                    <p id="mazeStatus"></p>
+                </div>
+            </div>
+        </div>
+
+        <div id="sudoku" class="section">
+            <div class="game-container">
+                <h2>Sudoku Solver</h2>
+                <canvas id="sudokuCanvas" width="450" height="450"></canvas>
+                <div class="game-controls">
+                    <button onclick="generateSudoku()">Generate Puzzle</button>
+                    <button onclick="solveSudoku()" id="solveSudokuBtn" disabled>Solve Sudoku</button>
+                    <button onclick="resetSudoku()">Reset</button>
+                    <p id="sudokuStatus"></p>
+                </div>
+            </div>
+        </div>
+
+        <div id="trie" class="section">
+            <div class="game-container">
+                <h2>Trie Search</h2>
+                <div class="trie-input">
+                    <input type="text" id="searchInput" placeholder="Type to search..." oninput="searchTrie()">
+                    <button onclick="addWord()">Add Word</button>
+                    <input type="text" id="newWordInput" placeholder="Enter word to add">
+                </div>
+                <canvas id="trieCanvas" width="800" height="400"></canvas>
+                <div class="search-results">
+                    <p id="searchResults"></p>
+                </div>
+            </div>
+        </div>
+
+        <div id="binary" class="section">
+            <div class="game-container">
+                <h2>Binary Search Game</h2>
+                <div class="binary-visualization">
+                    <div class="search-range">
+                        <div class="range-bar">
+                            <div class="range-fill" id="rangeFill"></div>
+                            <div class="range-marker left" id="leftMarker">1</div>
+                            <div class="range-marker guess" id="guessMarker">50</div>
+                            <div class="range-marker right" id="rightMarker">100</div>
+                        </div>
+                    </div>
+                    <div class="binary-info">
+                        <p>Guess a number between <span id="currentMin">1</span> and <span id="currentMax">100</span></p>
+                        <p>Attempts: <span id="attempts">0</span></p>
+                        <p id="feedback"></p>
+                    </div>
+                </div>
+                <div class="game-controls">
+                    <input type="number" id="guessInput" placeholder="Enter your guess" min="1" max="100">
+                    <button onclick="makeGuess()">Make Guess</button>
+                    <button onclick="startNewGame()">New Game</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="connect4" class="section">
+            <div class="game-container">
+                <h2>Connect 4</h2>
+                <div class="connect4-board" id="connect4Board">
+                    <!-- Board will be generated by JavaScript -->
+                </div>
+                <div class="game-controls">
+                    <button onclick="connect4Game.resetGame()">New Game</button>
+                    <p id="connect4Status">Player 1's turn (Red)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="abstract-art.js"></script>
+    <script src="pong.js"></script>
+    <script src="maze.js"></script>
+    <script src="sudoku.js"></script>
+    <script src="trie.js"></script>
+    <script src="binary-search.js"></script>
+    <script src="connect4.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
+</body>
+</html>
