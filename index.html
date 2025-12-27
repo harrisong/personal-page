@@ -242,6 +242,7 @@
                 <h2>Pixel Art</h2>
                 <div class="pixelart-controls">
                     <input type="file" id="imageUpload" accept="image/*">
+                    <button id="loadRandomBtn">Load Random Image</button>
                     <label for="pixelSizeSlider">Pixel Size: <span id="pixelSizeValue">10</span></label>
                     <input type="range" id="pixelSizeSlider" min="2" max="50" value="10">
                     <button id="pixelateBtn">Pixelate Image</button>
@@ -249,7 +250,7 @@
                 <canvas id="pixelArtCanvas" width="600" height="400"></canvas>
                 <div class="pixelart-instructions">
                     <p><strong>How to Use:</strong></p>
-                    <p>• Upload an image using the file input</p>
+                    <p>• Upload an image using the file input or click "Load Random Image" for a sample</p>
                     <p>• Adjust the pixel size with the slider</p>
                     <p>• Click "Pixelate Image" to apply the effect</p>
                 </div>

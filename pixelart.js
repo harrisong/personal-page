@@ -19,6 +19,10 @@ class PixelArtGame {
         const fileInput = document.getElementById('imageUpload');
         fileInput.addEventListener('change', (e) => this.loadImage(e));
 
+        // Set up random image button
+        const randomBtn = document.getElementById('loadRandomBtn');
+        randomBtn.addEventListener('click', () => this.loadRandomImage());
+
         // Set up pixel size slider
         const pixelSlider = document.getElementById('pixelSizeSlider');
         const pixelValue = document.getElementById('pixelSizeValue');
@@ -56,6 +60,20 @@ class PixelArtGame {
             img.src = e.target.result;
         };
         reader.readAsDataURL(file);
+    }
+
+    loadRandomImage() {
+        const img = new Image();
+        img.crossOrigin = 'anonymous'; // To avoid CORS issues
+        img.onload = () => {
+            this.originalImage = img;
+            // Draw original image
+            this.canvas.width = img.width;
+            this.canvas.height = img.height;
+            this.ctx.drawImage(img, 0, 0);
+        };
+        // Use Lorem Picsum for random images (CORS-friendly)
+        img.src = `https://picsum.photos/600/400?random=${Date.now()}`; // Add timestamp to avoid cache
     }
 
     pixelateImage() {
