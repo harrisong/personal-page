@@ -31,6 +31,7 @@
                 <button class="nav-btn" onclick="showSection('trie', this)">Trie Search</button>
                 <button class="nav-btn" onclick="showSection('binary', this)">Binary Search</button>
                 <button class="nav-btn" onclick="showSection('connect4', this)">Connect 4</button>
+                <button class="nav-btn" onclick="showSection('minesweeper', this)">Minesweeper</button>
                 <button class="nav-btn" onclick="showSection('clock', this)">Word Clock</button>
                 <button class="nav-btn" onclick="showSection('earth', this)">Earth Clock</button>
             </div>
@@ -161,6 +162,30 @@
             </div>
         </div>
 
+        <div id="minesweeper" class="section">
+            <div class="game-container">
+                <h2>Minesweeper</h2>
+                <div class="minesweeper-controls">
+                    <button onclick="newMinesweeperGame()">New Game</button>
+                    <select id="difficultySelect" onchange="changeDifficulty()">
+                        <option value="beginner">Beginner (9x9, 10 mines)</option>
+                        <option value="intermediate">Intermediate (16x16, 40 mines)</option>
+                        <option value="expert">Expert (16x30, 99 mines)</option>
+                    </select>
+                    <p>Mines Left: <span id="minesLeft">0</span></p>
+                    <p id="gameStatus">Click to start playing!</p>
+                </div>
+                <canvas id="minesweeperCanvas" width="288" height="288"></canvas>
+                <div class="minesweeper-instructions">
+                    <p><strong>How to Play:</strong></p>
+                    <p>• Left-click to reveal cells</p>
+                    <p>• Right-click to flag/unflag mines</p>
+                    <p>• Numbers show adjacent mines</p>
+                    <p>• Flag all mines to win!</p>
+                </div>
+            </div>
+        </div>
+
         <div id="clock" class="section">
             <div class="game-container">
                 <h2>Word Clock</h2>
@@ -203,6 +228,7 @@
     <script src="connect4.js"></script>
     <script src="clock.js"></script>
     <script src="earth.js"></script>
+    <script src="minesweeper.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
