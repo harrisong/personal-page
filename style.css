@@ -106,7 +106,7 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     font-size: 0.9rem;
-    width: 100%;
+    width: 120px;
     text-align: center;
     box-sizing: border-box;
 }
@@ -127,14 +127,14 @@ body {
 }
 
 .nav-btn:hover {
-    background: rgba(160, 82, 45, 0.3);
-    color: #FAF9F6;
+    background: rgba(255, 255, 255, 0.2);
+    color: #A0522D;
     transform: translateY(-2px);
 }
 
 .nav-btn.active {
-    background: rgba(160, 82, 45, 0.4);
-    color: #FAF9F6;
+    background: rgba(255, 255, 255, 0.2);
+    color: #A0522D;
 }
 
 /* Dropdown menu */
