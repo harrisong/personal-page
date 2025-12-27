@@ -115,10 +115,11 @@ class DottedBackground {
                         line.progress = 0; // Reset progress for erasing
                     }
                 } else if (line.isErasing) {
-                    // Erasing gradually from dot1 to dot2
-                    line.progress += line.drawSpeed;
+                    // Erasing gradually from dot1 to dot2 (faster)
+                    line.progress += line.drawSpeed * 1.5; // 50% faster erasing
                     if (line.progress >= 1) {
-                        line.hasCompletedCycle = true;
+                        // Instead of completing cycle, continue to new random dot
+                        this.continueLineToNewDot(line);
                     }
                 }
             }
@@ -126,6 +127,41 @@ class DottedBackground {
 
         // Remove completed traversing lines
         this.traversingLines = this.traversingLines.filter(line => !line.hasCompletedCycle);
+    }
+
+    continueLineToNewDot(line) {
+        // Continue the line from its current end point (dot2) to a new random dot
+        if (this.dots.length < 2) return;
+
+        // Start from where the line ended (dot2 becomes new dot1)
+        const currentDot = line.dot2;
+        let nextDot;
+
+        // Find a different dot within reasonable distance
+        const maxAttempts = 10;
+        for (let i = 0; i < maxAttempts; i++) {
+            nextDot = this.dots[Math.floor(Math.random() * this.dots.length)];
+            if (nextDot === currentDot) continue;
+
+            const dx = currentDot.x - nextDot.x;
+            const dy = currentDot.y - nextDot.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (distance > 30 && distance < 200) { // Reasonable distance range
+                break;
+            }
+        }
+
+        if (nextDot && nextDot !== currentDot) {
+            // Update the line to continue to the new dot
+            line.dot1 = currentDot; // Start from current position
+            line.dot2 = nextDot;    // Go to new random dot
+            line.progress = 0;     // Reset progress
+            line.isDrawing = true; // Start drawing again
+            line.isErasing = false;
+            line.hasCompletedCycle = false;
+            // Keep the same speed and opacity for continuity
+        }
     }
 
     createTraversingLine() {
@@ -155,7 +191,7 @@ class DottedBackground {
                     dot1: dot1,
                     dot2: dot2,
                     progress: 0,
-                    drawSpeed: 0.006 + Math.random() * 0.004, // Slightly slower than cursor lines
+                    drawSpeed: 0.012 + Math.random() * 0.008, // Faster drawing speed
                     opacity: 0.25 + Math.random() * 0.2, // Lower opacity for ambient effect
                     isDrawing: true,
                     isErasing: false,
@@ -286,8 +322,8 @@ class DottedBackground {
                     const cursorDy = avgY - this.mouseY;
                     const cursorDistance = Math.sqrt(cursorDx * cursorDx + cursorDy * cursorDy);
 
-                    // Closer to cursor = more opaque
-                    const lineOpacity = Math.max(0.1, 0.35 - (cursorDistance / maxDistance) * 0.25);
+                    // Closer to cursor = more opaque (extremely subtle)
+                    const lineOpacity = Math.max(0.01, 0.03 - (cursorDistance / maxDistance) * 0.02);
                     this.ctx.globalAlpha = lineOpacity;
 
                     this.ctx.beginPath();

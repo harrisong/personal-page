@@ -32,6 +32,7 @@
                 <button class="nav-btn" onclick="showSection('binary', this)">Binary Search</button>
                 <button class="nav-btn" onclick="showSection('connect4', this)">Connect 4</button>
                 <button class="nav-btn" onclick="showSection('clock', this)">Word Clock</button>
+                <button class="nav-btn" onclick="showSection('earth', this)">Earth Clock</button>
             </div>
         </div>
     </div>
@@ -171,8 +172,28 @@
                 </div>
             </div>
         </div>
+
+        <div id="earth" class="section">
+            <div class="game-container">
+                <h2>Earth Clock</h2>
+                <div class="earth-container">
+                    <canvas id="earthCanvas" width="600" height="600"></canvas>
+                    <div class="location-info">
+                        <div class="location" id="seattleInfo">
+                            <h3>Seattle</h3>
+                            <p id="seattleTime">Loading...</p>
+                        </div>
+                        <div class="location" id="hongkongInfo">
+                            <h3>Hong Kong</h3>
+                            <p id="hongkongTime">Loading...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="abstract-art.js"></script>
     <script src="pong.js"></script>
     <script src="maze.js"></script>
@@ -181,6 +202,7 @@
     <script src="binary-search.js"></script>
     <script src="connect4.js"></script>
     <script src="clock.js"></script>
+    <script src="earth.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
