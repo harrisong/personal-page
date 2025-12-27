@@ -32,6 +32,7 @@
                 <button class="nav-btn" onclick="showSection('binary', this)">Binary Search</button>
                 <button class="nav-btn" onclick="showSection('connect4', this)">Connect 4</button>
                 <button class="nav-btn" onclick="showSection('minesweeper', this)">Minesweeper</button>
+                <button class="nav-btn" onclick="showSection('worldclock', this)">World Clock</button>
                 <button class="nav-btn" onclick="showSection('clock', this)">Word Clock</button>
                 <button class="nav-btn" onclick="showSection('earth', this)">Earth Clock</button>
             </div>
@@ -186,6 +187,24 @@
             </div>
         </div>
 
+        <div id="worldclock" class="section">
+            <div class="game-container">
+                <h2>World Clock</h2>
+                <div class="world-clock-container">
+                    <div class="analog-clock" id="seattleClock">
+                        <canvas id="seattleCanvas" width="300" height="300"></canvas>
+                        <h3>Seattle</h3>
+                        <p id="seattleDigitalTime"></p>
+                    </div>
+                    <div class="analog-clock" id="hongkongClock">
+                        <canvas id="hongkongCanvas" width="300" height="300"></canvas>
+                        <h3>Hong Kong</h3>
+                        <p id="hongkongDigitalTime"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div id="clock" class="section">
             <div class="game-container">
                 <h2>Word Clock</h2>
@@ -229,6 +248,7 @@
     <script src="clock.js"></script>
     <script src="earth.js"></script>
     <script src="minesweeper.js"></script>
+    <script src="worldclock.js"></script>
     <script src="app.js"></script>
 </body>
 </html>

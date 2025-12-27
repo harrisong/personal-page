@@ -527,6 +527,58 @@ canvas {
     color: #333;
 }
 
+/* World Clock */
+.world-clock-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 3rem;
+    flex-wrap: wrap;
+}
+
+.analog-clock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: none;
+    border-radius: 0;
+    padding: 2rem;
+    box-shadow: none;
+}
+
+.analog-clock canvas {
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-radius: 50%;
+    border: 1px solid rgba(160, 82, 45, 0.6);
+    cursor: grab;
+    transition: all 0.2s ease;
+}
+
+.analog-clock canvas:active {
+    cursor: grabbing;
+    transform: scale(1.02);
+}
+
+.analog-clock h3 {
+    color: #A0522D;
+    font-size: 1.5rem;
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+.analog-clock p {
+    color: #2F4F4F;
+    font-size: 1.1rem;
+    margin: 0;
+    font-weight: 500;
+}
+
 /* Word Clock */
 .word-clock {
     display: flex;
