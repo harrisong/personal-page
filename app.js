@@ -117,6 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
     trieGame.init();
     binaryGame.init();
     connect4Game.init();
+    pixelArtGame.init();
 
     // Set default section
     showSection('about');
