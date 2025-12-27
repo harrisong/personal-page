@@ -192,7 +192,7 @@ class DottedBackground {
                     dot2: dot2,
                     progress: 0,
                     drawSpeed: 0.012 + Math.random() * 0.008, // Faster drawing speed
-                    opacity: 0.25 + Math.random() * 0.2, // Lower opacity for ambient effect
+                    opacity: 0.08 + Math.random() * 0.07, // Much lower opacity for ambient effect
                     isDrawing: true,
                     isErasing: false,
                     hasCompletedCycle: false,
@@ -322,8 +322,8 @@ class DottedBackground {
                     const cursorDy = avgY - this.mouseY;
                     const cursorDistance = Math.sqrt(cursorDx * cursorDx + cursorDy * cursorDy);
 
-                    // Closer to cursor = more opaque (extremely subtle)
-                    const lineOpacity = Math.max(0.01, 0.03 - (cursorDistance / maxDistance) * 0.02);
+                    // Closer to cursor = more opaque (more visible)
+                    const lineOpacity = Math.max(0.05, 0.15 - (cursorDistance / maxDistance) * 0.1);
                     this.ctx.globalAlpha = lineOpacity;
 
                     this.ctx.beginPath();
