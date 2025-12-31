@@ -658,6 +658,74 @@ canvas {
     font-weight: 500;
 }
 
+/* QLOCKTWO */
+.qlocktwo-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px auto;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    padding: 30px;
+    font-family: 'Bogle', sans-serif;
+}
+
+.qlocktwo-row {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+.qlocktwo-row:last-child {
+    margin-bottom: 0;
+}
+
+.qlocktwo-cell {
+    width: 40px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #666;
+    background: #f8f8f8;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    margin: 2px;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.qlocktwo-cell::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.2) 100%);
+    border-radius: 2px;
+    pointer-events: none;
+}
+
+.qlocktwo-cell.active {
+    color: #fff;
+    background: #A0522D;
+    border-color: #8B4513;
+    box-shadow: 0 0 15px rgba(160, 82, 45, 0.6), inset 0 1px 0 rgba(255,255,255,0.2);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+}
+
+.qlocktwo-cell.active::before {
+    background: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.1) 100%);
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
     .container {
